@@ -1,0 +1,42 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+
+@Callable(i)
+func updateInfos(name: String, intro: String) = {
+    let ownerAddress = i.caller
+    WriteSet([
+        DataEntry(ownerAddress.toString() + "_name", name),
+        DataEntry(ownerAddress.toString() + "_intro", intro)
+    ])
+}
+
+@Callable(i)
+func addUpdateCase(identifiant: Int, gender: String, age: Int, location: String, pec: String, status: Int, date: Int) = {
+    let ownerAddress = i.caller.toString()
+    let currentCounterNum = match this.getInteger(ownerAddress + "_counterNum") {
+        case c: Int => c
+        case _ => 1
+    }
+    let patientID = match this.getInteger(ownerAddress + "_patient_"+identifiant.toString()+"_identifiant") {
+        case p: Int => p
+        case _ => currentCounterNum + 1
+    }
+
+    let json = "{\"identifiant\":\""+patientID.toString()+"\",\"gender\":\""+gender+"\",\"age\":\""+age.toString()+"\",\"pec\":\""+pec+"\",\"location\":\""+location+"\",\"date\":\""+date.toString()+"\",\"status\":\""+status.toString()+"\"}"
+    
+    let updateCounter = if(identifiant == 0) then currentCounterNum + 1 else currentCounterNum
+    if(status != 1 && status != 2 && status != 3 ) then throw("Wrong status")
+    else
+    WriteSet([
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_identifiant", patientID),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_gender", gender),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_age", age),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_pec", pec),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_location", location),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_status", status),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_date", date),
+        DataEntry(ownerAddress + "_patient_"+patientID.toString()+"_json", json),
+        DataEntry(ownerAddress + "_counterNum", updateCounter)
+    ])
+}
