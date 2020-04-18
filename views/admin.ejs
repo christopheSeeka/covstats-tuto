@@ -1,12 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Admin</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>this is my admin page</h1>
-    <p>Welcome to admin</p>
-  </body>
-  <script src="javascripts/bundle-admin.js"></script>
+
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
+    crossorigin="anonymous">
+  </script>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body id="admin">
+  <div id="loader" class="fade0">
+    LOADING DATA...
+  </div>
+  <div class="container wrap_admin">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="wrap_top">
+          <h2><span id="title"></span> ADMIN</h2>
+          <p id="introtop" class="mb-0 mb-sm-3"></p>
+          <div id="infosAccount" class="mb-3"><strong>Create an new account or connect to an existing one</strong></div>
+          <button id="login" class="btn my-2 my-sm-0">START</button>
+          <a href="./" class="d-block mt-3 mb-3">GO TO HOME PAGE</a>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-lg-8 offset-lg-2">
+        <div class="alert alert-danger d-none mt-2 text-center" role="alert"></div>
+        <div class="alert alert-success d-none mt-2 text-center" role="alert"></div>
+      </div>
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="accordion" id="accordionWrapper">
+          <div class="card">
+            <div class="card-header p-0" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn w-100" type="button" data-toggle="collapse" data-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  MANAGE YOUR PAGE INFOS
+                </button>
+              </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionWrapper">
+              <div class="card-body">
+                <form id="infosform" class="container">
+                  <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+
+                      <label for="name"> Page name: </label>
+                      <input type="text" name="name" class="form-control" id="name" />
+
+                      <label for="intro"> Introduction: </label>
+                      <textarea name="intro" id="intro" class="form-control"></textarea>
+                      <input type="submit" class="btn btn-primary d-block w-50 mx-auto mb-2 mt-4" value="UPDATE INFOS"
+                        id="accountInfo" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header p-0" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn w-100 collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                  aria-expanded="false" aria-controls="collapseTwo">
+                  ADD OR UPDATE ENTRY
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionWrapper">
+              <div class="card-body">
+                <form id="addform" class="container">
+                  <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                      <div class="input-group d-block">
+                        <label for="identifiant"> Identifiant: </label>
+                        <select class="custom-select" id="identifiant">
+                          <option value="0" selected>New entry</option>
+                        </select>
+                      </div>
+
+                      <div class="input-group d-block">
+                        <label for="gender"> Gender: </label>
+                        <select class="custom-select" id="gender">
+                          <option value="male" selected>Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+
+                      <label for="age"> Age: </label>
+                      <input type="text" name="age" class="form-control" id="age" />
+
+                      <label for="location"> Location: </label>
+                      <input type="text" name="location" class="form-control" id="location" />
+
+                      <div class="input-group d-block">
+                        <label for="identifiant"> Pre-Existing Condition: </label>
+                        <select class="custom-select" id="pec">
+                          <option value="no" selected>No</option>
+                          <option value="yes">Yes</option>
+                        </select>
+                      </div>
+
+                      <div class="input-group d-block">
+                        <label for="status"> Status: </label>
+                        <select class="custom-select" id="status">
+                          <option value="1">ACTIVE</option>
+                          <option value="2">RECOVERED</option>
+                          <option value="3">DECEASED</option>
+                        </select>
+                      </div>
+                      <input type="submit" class="btn btn-primary d-block w-50 mx-auto mb-2 mt-4" value="ADD NEW CASE"
+                        id="addEntry" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</body>
+<script src="javascripts/bundle-admin.js"></script>
+
 </html>
