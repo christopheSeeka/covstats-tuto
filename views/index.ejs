@@ -1,12 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Index</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>this is my index page</h1>
-    <p>Welcome to index</p>
-  </body>
-  <script src="javascripts/bundle-main.js"></script>
+
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https:////cdn.datatables.net/plug-ins/1.10.11/sorting/date-eu.js"></script>
+  <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="/javascripts/canvasjs.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css"  href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div id="wrap_home">
+    <div class="container mb-3">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1 text-center">
+          <a href="/admin" id="cta">Edit page</a>
+          <h1 id="title"></h1>
+          <p id="introtop" class="mb-0 mb-sm-3"></p>
+        </div>
+      </div>
+    </div>
+    <div class="container mb-0 mb-sm-3" id="top_bar">
+      <div class="row text-center">
+        <div class="col-lg-10 offset-lg-1">
+          <div class="row">
+            <div class="col-12">
+              <div class="wrap_chart">
+                <div id="fadetext"></div>
+                <div id="chartContainer" style="height: 150px; width: 100%;" class="mb-2"></div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3 mb-3 mb-sm-1 text-info">
+              <div class="wrap p-2 p-md-4 d-flex align-items-center justify-content-center">
+                Total: <span class="total">0</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3 mb-3 mb-sm-1 text-primary">
+              <div class="wrap p-2 p-md-4 d-flex align-items-center justify-content-center">
+                Active: <span class="active">0</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3 mb-3 mb-sm-1 text-success">
+              <div class="wrap p-2 p-md-4 d-flex align-items-center justify-content-center">
+                Recovered: <span class="recovered">0</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3 mb-3 mb-sm-1 text-danger">
+              <div class="wrap p-2 p-md-4 d-flex align-items-center justify-content-center">
+                Deceased: <span class="deceased">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <div id="filtering" class="d-flex mb-3"></div>
+
+          <table class="w-100 table table-striped" id="results">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>DATE</td>
+                <td>GENDER</td>
+                <td>AGE</td>
+                <td>LOCATION</td>
+                <td>PEC*</td>
+                <td>STATUS</td>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+          <div class="loading w-100 text-center p-4">Loading data from <strong>Waves Blockchain</strong></div>
+        </div>
+      </div>
+    </div>
+    <footer class="container mt-4">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-1">
+          Page Address: <a href="#" target="_blank" id="pageaddress"></a><br />
+          Smart Contract: <a href="#" target="_blank" id="smartcontract"></a><br />
+
+        </div>
+        <div class="col-lg-4">
+          *PEC = Pre-Existing Condition<br />
+          <a href="https://github.com/christopheSeeka/cov-stats" target="_blank">Get the Github sources</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+<script src="javascripts/bundle-main.js"></script>
 </html>
