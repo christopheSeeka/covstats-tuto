@@ -8,8 +8,8 @@ class Getdata {
     // DECLARE YOUR GLOBAL CONFIG VARIABLES FROM THE SETTINGS FILE
     this.dappAddress = config.get("dappAddress")
     this.userAddress = config.get("userAddress")
-/*     this.nodeUrl = config.get("nodeURL")
-    this.providerUrl = config.get("providerUrl"); */
+    this.nodeUrl = config.get("nodeURL")
+    this.providerUrl = config.get("providerUrl");
     this.explorerSegment = config.get("network") == "T" ? "/testnet" : ""
 
     // CHECK IF THERE IS A PAGE ADDRESS IN FIRST URL SEGMENT, IF YES USE IT,

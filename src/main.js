@@ -164,10 +164,12 @@ let initChart = function(data){
 
 // WE GET THE TOTAL NUMBER OF CASES FOR THE CURRENT ACCOUNT/PAGE THEN WE PROCESS THE DATA
 getdata.getDataByKey(getdata.userAddress+"_counterNum").then(async res => {
-
+  console.log(getdata.userAddress);
   let getAllJson = await getdata.getDataByKey(getdata.userAddress+"_patient_(.*)_json");
 
   // HERE WE REDUCE THE DATA FOR THE CHART BY GROUPING BY DATES AND COUNTING NUMBER OF CASES BY DATES
+      console.log("getAllJson");
+      console.log(getAllJson);
       let dataCopy = JSON.stringify(getAllJson); 
       dataCopy = JSON.parse(dataCopy);
       dataCopy.reduce(function (h, obj) {
