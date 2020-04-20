@@ -1,7 +1,11 @@
+// IT'S ALWAYS GOOD PRACTICE TO SANITIZE STRING DATA WHEN YOU DON'T KNOW THE SOURCE THAT ADDED IT TO AVOID XSS ATTACKS
+import sanitizeHtml from "sanitize-html";
+
 // IMPORT GETDATA TOOLS, THIS FILE INCLUDE METHODS USED IN DIFFERENT PAGES TO AVOID REPETITION
 import Getdata from "./getdata";
 // INIT THE TOOLS
 let getdata = new Getdata();
+
 
 // DECLARE YOUR VARIABLES TO STORE THE DIFFERENT CASES NUMBERS
 let countActive = 0,
@@ -12,15 +16,16 @@ let countActive = 0,
 
 // GET/SET PAGE NAME FROM DATA STORAGE
 getdata.getDataByKey(getdata.userAddress + "_name").then((res) => {
-  document.getElementById("title").innerHTML = res[0].value;
-  document.title = res[0].value;
+  // NOTICE THE USE OF SANITIZE, THIS WILL REMOVE ALL POSSIBLE JAVASCRIPT AND UNWANTED CODE
+  document.getElementById("title").innerHTML = sanitizeHtml(res[0].value, { allowedTags: [] });
+  document.title = sanitizeHtml(res[0].value, { allowedTags: [] });
 }).catch(err => {
   console.log("no data")
 });
 
 // GET/SET PAGE DESCRIPTION FROM DATA STORAGE
 getdata.getDataByKey(getdata.userAddress + "_intro").then((res) => {
-  document.getElementById("introtop").innerHTML = res[0].value;
+  document.getElementById("introtop").innerHTML = sanitizeHtml(res[0].value, { allowedTags: [] });
 }).catch(err => {
   console.log("no data")
 });
@@ -164,12 +169,10 @@ let initChart = function(data){
 
 // WE GET THE TOTAL NUMBER OF CASES FOR THE CURRENT ACCOUNT/PAGE THEN WE PROCESS THE DATA
 getdata.getDataByKey(getdata.userAddress+"_counterNum").then(async res => {
-  console.log(getdata.userAddress);
+
   let getAllJson = await getdata.getDataByKey(getdata.userAddress+"_patient_(.*)_json");
 
   // HERE WE REDUCE THE DATA FOR THE CHART BY GROUPING BY DATES AND COUNTING NUMBER OF CASES BY DATES
-      console.log("getAllJson");
-      console.log(getAllJson);
       let dataCopy = JSON.stringify(getAllJson); 
       dataCopy = JSON.parse(dataCopy);
       dataCopy.reduce(function (h, obj) {
@@ -217,10 +220,10 @@ getdata.getDataByKey(getdata.userAddress+"_counterNum").then(async res => {
       let tempTR = `<tr>
         <td class="id">${entry.identifiant}</td>
         <td class="gender">${formatedDate}</td>
-          <td class="gender">${entry.gender}</td>
+          <td class="gender">${sanitizeHtml(entry.gender, { allowedTags: [] })}</td>
           <td class="age">${entry.age}</td>
-          <td class="location">${entry.location}</td>
-          <td class="pec">${entry.pec}</td>
+          <td class="location">${sanitizeHtml(entry.location, { allowedTags: [] })}</td>
+          <td class="pec">${sanitizeHtml(entry.pec, { allowedTags: [] })}</td>
           <td class="status">${status}</td>
         </tr>`;
 
@@ -248,6 +251,8 @@ getdata.getDataByKey(getdata.userAddress+"_counterNum").then(async res => {
     document.querySelector(".loading").innerHTML = "No data available.";
     document.getElementById("chartContainer").style.display = "none";
   }
+
+
 
 }).catch(err => {
   // WE GET AN ERROR IF THERE IS NO ENTRY FOR THE ACCOUNT
