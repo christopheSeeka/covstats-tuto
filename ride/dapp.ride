@@ -16,7 +16,7 @@ func addUpdateCase(identifiant: Int, gender: String, age: Int, location: String,
     let ownerAddress = i.caller.toString()
     let currentCounterNum = match this.getInteger(ownerAddress + "_counterNum") {
         case c: Int => c
-        case _ => 1
+        case _ => 0
     }
     let patientID = match this.getInteger(ownerAddress + "_patient_"+identifiant.toString()+"_identifiant") {
         case p: Int => p
